@@ -1,5 +1,7 @@
 # CardMaker
 
+> 🚧 **Work in Progress** - This project is under active development. Features and APIs may change.
+
 Stateless, memory-only business card generator that ingests employee data from Excel, merges it into PowerPoint templates with OpenXML, and serves a Blazor Server UI. Designed to be fast to run, easy to contribute, and safe for open source.
 
 🌐 **Live Demo**: [cardmaker.hyunjo.uk](https://cardmaker.hyunjo.uk)
@@ -7,6 +9,7 @@ Stateless, memory-only business card generator that ingests employee data from E
 ## Highlights
 - Excel import (xlsx) with header auto-detection and a downloadable template; no database writes.
 - PowerPoint card generation with formatting preservation via `DocumentFormat.OpenXml`; optional PDF conversion via LibreOffice.
+- QR code generation for business cards with customizable vCard data.
 - Security-first defaults in the web host (CSP, rate limiting, health checks).
 - Docker- and compose-ready; Apache 2.0 licensed.
 - Status: actively testing (templates, QR flow, and E2E); expect changes before production.
@@ -35,14 +38,14 @@ dotnet build BusinessCardMaker.slnx
 
 # Run the web app
 dotnet run --project src/BusinessCardMaker.Web
-# browse http://localhost:5000
+# browse http://localhost:5255
 
 # Tests (add tests under tests/BusinessCardMaker.Tests)
 dotnet test BusinessCardMaker.slnx
 
 # Docker
-docker compose up --build         # or: docker build -f Dockerfile.web -t businesscardmaker:latest .
-docker run -p 5050:8080 businesscardmaker:latest
+docker compose up --build         # or: docker build -f Dockerfile.web -t cardmaker:latest .
+docker run -p 5049:5049 cardmaker:latest
 ```
 
 ## Templates
