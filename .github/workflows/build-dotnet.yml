@@ -49,7 +49,7 @@ jobs:
         
     - name: Create Release (on main branch)
       if: github.ref == 'refs/heads/main'
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         tag_name: v1.0.${{ github.run_number }}
         name: Business Card Maker v1.0.${{ github.run_number }}
