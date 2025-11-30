@@ -2,14 +2,14 @@
 @using BusinessCardMaker.Core.Models
 @using BusinessCardMaker.Core.Services.Import
 @using BusinessCardMaker.Core.Services.CardGenerator
-@using BusinessCardMaker.Core.Services.Template
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.JSInterop
+@using Microsoft.AspNetCore.Hosting
 @using System
 @inject IExcelImportService ImportService
 @inject ICardGeneratorService CardService
-@inject ITemplateService TemplateService
 @inject IJSRuntime JS
+@inject IWebHostEnvironment WebHostEnvironment
 @rendermode InteractiveServer
 
 <PageTitle>CardMaker - Business Card Generator with QR Codes</PageTitle>
@@ -123,7 +123,9 @@
                     <div class="col-md-6">
                         @if (isInteractive)
                         {
-                            <button class="btn btn-outline-success w-100 py-3" @onclick="() => DownloadPPTTemplate(true)">
+                            <button class="btn btn-outline-success w-100 py-3"
+                                    disabled="@isTemplateDownloading"
+                                    @onclick="DownloadPPTTemplate">
                                 <i class="bi bi-file-earmark-ppt"></i><br />
                                 <strong>Download PowerPoint Template</strong><br />
                                 <small>Includes QR placeholder</small>
@@ -224,6 +226,7 @@
 @code {
     private bool isInteractive = false;
     private bool isProcessing = false;
+    private bool isTemplateDownloading = false;
     private int progress = 0;
     private string processingMessage = "";
     private string? errorMessage;
@@ -271,19 +274,30 @@
         }
     }
 
-    private async Task DownloadPPTTemplate(bool withQRCode)
+    private async Task DownloadPPTTemplate()
     {
+        if (isTemplateDownloading) return;
+
         try
         {
-            var bytes = TemplateService.CreateBasicTemplate();
-            var filename = "CardMaker_Template.pptx";
+            isTemplateDownloading = true;
+            errorMessage = null;
+            StateHasChanged();
+
+            var templatePath = Path.Combine(WebHostEnvironment.WebRootPath, "templates", "CardMaker_Template.pptx");
+            var bytes = await File.ReadAllBytesAsync(templatePath);
             var stream = new MemoryStream(bytes);
             using var streamRef = new DotNetStreamReference(stream: stream);
-            await JS.InvokeVoidAsync("downloadFileFromStream", filename, streamRef);
+            await JS.InvokeVoidAsync("downloadFileFromStream", "CardMaker_Template.pptx", streamRef);
         }
         catch (Exception ex)
         {
             errorMessage = $"Template download failed: {ex.Message}";
+        }
+        finally
+        {
+            isTemplateDownloading = false;
+            StateHasChanged();
         }
     }
 

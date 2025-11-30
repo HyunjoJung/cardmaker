@@ -82,11 +82,12 @@ app.Use(async (context, next) =>
     // Content Security Policy
     context.Response.Headers.Append("Content-Security-Policy",
         "default-src 'self'; " +
-        "script-src 'self' 'unsafe-inline' 'unsafe-eval'; " + // Blazor requires unsafe-eval
-        "style-src 'self' 'unsafe-inline'; " +
-        "img-src 'self' data:; " +
-        "font-src 'self'; " +
-        "connect-src 'self' wss: ws:; " + // WebSocket for Blazor SignalR
+        "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://pagead2.googlesyndication.com https://googletagservices.com https://static.cloudflareinsights.com https://*.google.com https://*.google https://*.gstatic.com; " + // Blazor requires unsafe-eval, allow AdSense and Cloudflare
+        "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " + // Inline styles for Blazor
+        "img-src 'self' data: https://pagead2.googlesyndication.com https://*.google.com https://*.google https://*.gstatic.com https://*.doubleclick.net; " + // Allow AdSense images
+        "font-src 'self' https://fonts.gstatic.com; " +
+        "frame-src https://googleads.g.doubleclick.net https://tpc.googlesyndication.com https://*.google.com https://*.google; " + // Allow AdSense iframes
+        "connect-src 'self' wss: ws: https://pagead2.googlesyndication.com https://cloudflareinsights.com https://*.google.com https://*.google https://*.doubleclick.net; " + // WebSocket for Blazor SignalR, AdSense and Cloudflare connections
         "frame-ancestors 'none'; " +
         "base-uri 'self'; " +
         "form-action 'self'");
@@ -107,7 +108,20 @@ if (!disableRateLimiter)
     app.UseRateLimiter();
 }
 app.UseAntiforgery();
+
 app.UseResponseCaching();
+
+var staticFileOptions = new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        // Cache static assets for one week
+        ctx.Context.Response.Headers["Cache-Control"] = "public,max-age=604800";
+        ctx.Context.Response.Headers["Vary"] = "Accept-Encoding";
+    }
+};
+
+app.UseStaticFiles(staticFileOptions);
 
 // Map health check endpoint
 app.MapHealthChecks("/health");
