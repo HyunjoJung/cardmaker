@@ -1,0 +1,88 @@
+@page "/faq"
+@using System.Text.Json
+@using Microsoft.AspNetCore.Components
+
+<PageTitle>FAQ - CardMaker</PageTitle>
+
+<HeadContent>
+    <meta name="description" content="FAQ for CardMaker: privacy, QR codes, templates, file size limits, and open-source details." />
+    <link rel="canonical" href="https://cardmaker.hyunjo.uk/faq" />
+</HeadContent>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">FAQ</h1>
+        <p class="lead text-muted">Frequently asked questions about CardMaker</p>
+    </div>
+
+    <div class="faq-list" style="max-width: 900px; margin: 0 auto;">
+        @foreach (var (faq, index) in faqItems.Select((item, idx) => (item, idx)))
+        {
+            <div class="mb-3 border rounded overflow-hidden">
+                <details @attributes="@(index == 0 ? new Dictionary<string, object> { ["open"] = true } : null)">
+                    <summary class="p-3 fw-semibold d-flex align-items-center gap-2">
+                        <span class="text-primary bi bi-question-circle-fill"></span> @faq.Question
+                    </summary>
+                    <div class="p-3 border-top">
+                        @((MarkupString)faq.HtmlAnswer)
+                    </div>
+                </details>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private record FaqItem(string Question, string SchemaAnswer, string HtmlAnswer);
+
+    private readonly List<FaqItem> faqItems = new()
+    {
+        new FaqItem(
+            "How do I generate business cards?",
+            "Download the Excel and PowerPoint templates, fill Excel with employee data (Name and Email required), upload both files, then generate to download a ZIP of personalized cards.",
+            @"<ol class=""mb-0"">
+                <li>Download Excel and PowerPoint templates from Step 1</li>
+                <li>Fill Excel with employee data (Name and Email are required)</li>
+                <li>Optionally customize the PowerPoint template design</li>
+                <li>Upload both files in Step 2 and click <strong>Generate Cards</strong></li>
+                <li>Download the ZIP containing all generated business cards</li>
+              </ol>"
+        ),
+        new FaqItem(
+            "Is my data stored or saved anywhere?",
+            "No. All processing is in-memory only. Files and generated cards are temporary and automatically deleted. No accounts, no database, complete privacy.",
+            @"<p><strong>Zero data persistence.</strong> All processing happens in-memory and files are automatically deleted after generation. CardMaker doesn't use accounts, databases, or any form of storage. Your data remains completely private.</p>"
+        ),
+        new FaqItem(
+            "How do QR codes work?",
+            "Download the QR Code Template, and CardMaker automatically embeds vCard data (name, company, email, phone) into QR codes on each business card.",
+            @"<p>Download the <strong>QR Code Template</strong> from Step 1. CardMaker automatically generates QR codes containing vCard data (name, company, email, phone numbers) for each employee. When scanned, the QR code allows instant contact import to smartphones. You can add custom placeholders like <code>{linkedin}</code> in the template and populate them via Excel custom columns.</p>"
+        ),
+        new FaqItem(
+            "What placeholders are available?",
+            "Standard: {name}, {position}, {department}, {email}, {mobile}, {phone}, {extension}, {fax}, {company}, {name_en}, {position_en}. Custom fields map to {fieldName}.",
+            @"<p>Standard placeholders: <code>{name}</code>, <code>{position}</code>, <code>{department}</code>, <code>{email}</code>, <code>{mobile}</code>, <code>{phone}</code>, <code>{extension}</code>, <code>{fax}</code>, <code>{company}</code>, <code>{name_en}</code>, <code>{position_en}</code>. Custom Excel fields map to <code>{fieldName}</code> in the PPTX.</p>"
+        ),
+        new FaqItem(
+            "What are the file size limits?",
+            "Excel files: maximum 10MB. PowerPoint templates: maximum 50MB. Large files may slow down generation, so keep templates optimized.",
+            @"<p>Excel files: <strong>10MB maximum</strong>. PowerPoint templates: <strong>50MB maximum</strong>. For best performance, keep templates small and optimized. Maximum batch size: <strong>1,000 employees</strong> per generation.</p>"
+        ),
+        new FaqItem(
+            "Is it open source?",
+            "Yes. Apache 2.0 licensed at github.com/HyunjoJung/cardmaker.",
+            @"<p>Yes. Apache 2.0 at <a href=""https://github.com/HyunjoJung/cardmaker"" target=""_blank"" rel=""noopener noreferrer"">github.com/HyunjoJung/cardmaker</a>.</p>"
+        ),
+        new FaqItem(
+            "Can I self-host CardMaker?",
+            "Yes. CardMaker is open source and can be self-hosted. Clone the repository and run with .NET or Docker. Public instance available at cardmaker.hyunjo.uk.",
+            @"<p>Yes! CardMaker is fully open source and self-hostable. Clone from <a href=""https://github.com/HyunjoJung/cardmaker"" target=""_blank"" rel=""noopener noreferrer"">GitHub</a> and run:</p>
+              <ul>
+                <li><strong>.NET:</strong> <code>dotnet run --project src/BusinessCardMaker.Web</code></li>
+                <li><strong>Docker:</strong> <code>docker compose up --build</code></li>
+              </ul>
+              <p>Public instance: <strong>cardmaker.hyunjo.uk</strong> (free, no registration required)</p>"
+        )
+    };
+
+}

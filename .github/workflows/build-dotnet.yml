@@ -1,0 +1,82 @@
+name: Build .NET Windows Application
+
+on:
+  push:
+    branches: [ main ]
+    paths: 
+      - '**.cs'
+      - '**.csproj'
+      - '.github/workflows/build-dotnet.yml'
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore BusinessCardMaker.csproj
+      
+    - name: Build application
+      run: dotnet build BusinessCardMaker.csproj -c Release --no-restore
+      
+    - name: Publish single file executable
+      run: |
+        dotnet publish BusinessCardMaker.csproj `
+          -c Release `
+          --self-contained true `
+          -r win-x64 `
+          -p:PublishSingleFile=true `
+          -p:IncludeNativeLibrariesForSelfExtract=true `
+          -p:EnableCompressionInSingleFile=true `
+          -o dist
+          
+    - name: Upload executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: BusinessCardMaker-Windows
+        path: dist/BusinessCardMaker.exe
+        retention-days: 30
+        
+    - name: Create Release (on main branch)
+      if: github.ref == 'refs/heads/main'
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: v1.0.${{ github.run_number }}
+        name: Business Card Maker v1.0.${{ github.run_number }}
+        body: |
+          🎯 **C# .NET Windows 명함 자동화 시스템**
+          
+          ### ✨ 주요 기능
+          - Microsoft OpenXML SDK 기반 정확한 PowerPoint 조작
+          - COM 의존성 없는 안정적인 실행
+          - SQLite 데이터베이스 통합 관리
+          - Excel XML 파일 직접 파싱
+          - PPT + PDF 동시 생성 (LibreOffice 필요)
+          - 단일 exe 배포 (모든 의존성 포함)
+          
+          ### 🚀 사용법
+          1. `BusinessCardMaker.exe` 다운로드
+          2. 실행 (추가 설치 불필요)
+          3. Excel XML 파일 로드
+          4. 명함 생성!
+          
+          ### 📋 요구사항
+          - Windows 10/11 (x64)
+          - LibreOffice (PDF 생성용, 선택사항)
+          
+          **파일 크기**: ~80MB (모든 .NET 런타임 포함)
+        files: dist/BusinessCardMaker.exe
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
