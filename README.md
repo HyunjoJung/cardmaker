@@ -9,6 +9,7 @@ Stateless, memory-only business card generator that ingests employee data from E
 - PowerPoint card generation with formatting preservation via `DocumentFormat.OpenXml`; optional PDF conversion via LibreOffice.
 - Security-first defaults in the web host (CSP, rate limiting, health checks).
 - Docker- and compose-ready; Apache 2.0 licensed.
+- Status: actively testing (templates, QR flow, and E2E); expect changes before production.
 
 ## Project Layout
 ```
@@ -43,6 +44,10 @@ dotnet test BusinessCardMaker.slnx
 docker compose up --build         # or: docker build -f Dockerfile.web -t businesscardmaker:latest .
 docker run -p 5050:8080 businesscardmaker:latest
 ```
+
+## Templates
+- Excel template downloads directly from the UI (Step 1).
+- PowerPoint template is served as a static file: `wwwroot/templates/CardMaker_Template.pptx` (includes QR placeholder).
 
 ## Development Notes
 - Core services live in `src/BusinessCardMaker.Core/Services` (`Import` for Excel ingestion, `CardGenerator` for PPT output). All services are DI-friendly.

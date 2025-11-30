@@ -35,6 +35,7 @@ builder.Services.AddScoped<IExcelImportService, ExcelImportService>();
 builder.Services.AddScoped<IQRCodeService, QRCodeService>();
 builder.Services.AddScoped<ITemplateService, TemplateService>();
 builder.Services.AddScoped<ICardGeneratorService, CardGeneratorService>();
+builder.Services.AddLogging();
 
 // Add health checks
 builder.Services.AddHealthChecks();
@@ -118,14 +119,6 @@ app.MapGet("/api/templates/basic", (ITemplateService templateService) =>
     return Results.File(template, "application/vnd.openxmlformats-officedocument.presentationml.presentation", "BusinessCard_Basic_Template.pptx");
 })
 .WithName("DownloadBasicTemplate")
-.DisableAntiforgery();
-
-app.MapGet("/api/templates/qrcode", (ITemplateService templateService) =>
-{
-    var template = templateService.CreateQRCodeTemplate();
-    return Results.File(template, "application/vnd.openxmlformats-officedocument.presentationml.presentation", "BusinessCard_QRCode_Template.pptx");
-})
-.WithName("DownloadQRCodeTemplate")
 .DisableAntiforgery();
 
 app.MapStaticAssets();

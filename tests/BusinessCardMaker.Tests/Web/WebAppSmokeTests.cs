@@ -41,7 +41,7 @@ public class WebAppSmokeTests : IClassFixture<WebApplicationFactory<Program>>
 
     [Theory]
     [InlineData("/api/templates/basic")]
-    [InlineData("/api/templates/qrcode")]
+    [InlineData("/templates/CardMaker_Template.pptx")]
     public async Task TemplateEndpoints_ReturnPptx(string path)
     {
         var client = _factory.CreateClient();

@@ -4,8 +4,48 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-1012950383644941">
     <base href="/" />
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Free online tool to generate business cards with QR codes from Excel data and PowerPoint templates. No data stored. 엑셀 데이터와 파워포인트 템플릿으로 QR코드가 포함된 명함을 무료로 생성하는 온라인 도구." />
+    <meta name="keywords" content="명함 생성, 명함 만들기, business card maker, QR code, Excel, PowerPoint, 명함 자동화, business card generator, free tool" />
+    <meta name="author" content="CardMaker" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="English, Korean" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://cardmaker.hyunjo.uk/" />
+    <meta property="og:title" content="CardMaker - Business Card Generator with QR Codes" />
+    <meta property="og:description" content="Free online tool to generate business cards with QR codes from Excel data and PowerPoint templates." />
+    <meta property="og:image" content="https://cardmaker.hyunjo.uk/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="CardMaker - Business Card Generator" />
+    <meta property="og:site_name" content="CardMaker" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ko_KR" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CardMaker - Business Card Generator with QR Codes" />
+    <meta name="twitter:description" content="Free online tool to generate business cards with QR codes from Excel data and PowerPoint templates." />
+    <meta name="twitter:image" content="https://cardmaker.hyunjo.uk/og-image.png" />
+    <meta name="twitter:image:alt" content="CardMaker - Business Card Generator" />
+    <meta name="twitter:site" content="@@CardMaker" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://cardmaker.hyunjo.uk/" />
+
+    <!-- Performance Optimization -->
+    <link rel="preconnect" href="https://cardmaker.hyunjo.uk" crossorigin />
+    <link rel="dns-prefetch" href="https://cardmaker.hyunjo.uk" />
+
     <ResourcePreloader />
+    <link rel="preload" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" as="style" />
+    <link rel="preload" href="@Assets["app.css"]" as="style" />
     <link rel="stylesheet" href="@Assets["lib/bootstrap/dist/css/bootstrap.min.css"]" />
     <link rel="stylesheet" href="@Assets["app.css"]" />
     <link rel="stylesheet" href="@Assets["BusinessCardMaker.Web.styles.css"]" />
@@ -15,7 +55,59 @@
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link rel="manifest" href="site.webmanifest" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "WebApplication",
+        "name": "CardMaker - Business Card Generator",
+        "alternateName": "CardMaker",
+        "description": "Free online tool to generate business cards with QR codes from Excel data and PowerPoint templates",
+        "url": "https://cardmaker.hyunjo.uk/",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "offers": {
+            "@@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD",
+            "availability": "https://schema.org/InStock"
+        },
+        "featureList": [
+            "Generate business cards from Excel data",
+            "Create QR codes automatically",
+            "Use PowerPoint templates",
+            "Download generated cards as ZIP",
+            "No server storage - privacy focused",
+            "Support for .xlsx and .pptx formats"
+        ],
+        "screenshot": "https://cardmaker.hyunjo.uk/og-image.png",
+        "aggregateRating": {
+            "@@type": "AggregateRating",
+            "ratingValue": "5.0",
+            "ratingCount": "1"
+        },
+        "inLanguage": ["en", "ko"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "CardMaker",
+        "url": "https://cardmaker.hyunjo.uk/",
+        "logo": "https://cardmaker.hyunjo.uk/android-chrome-512x512.png",
+        "sameAs": []
+    }
+    </script>
+
     <HeadOutlet />
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1012950383644941"
+            crossorigin="anonymous"></script>
+
 </head>
 
 <body>
