@@ -53,5 +53,12 @@ docker run -p 5049:5049 cardmaker:latest
 - Configuration uses `appsettings*.json` with `BusinessCard` sections for processing limits and template mapping. Keep secrets out of source; prefer environment variables for overrides.
 - Keep the stateless philosophy: no DB writes, no user accounts, clear data at session end.
 
+## Dependencies
+CardMaker uses the following open-source libraries:
+
+- [DocumentFormat.OpenXml](https://github.com/dotnet/Open-XML-SDK) 3.2.0 - MIT License
+- [QRCoder](https://github.com/codebude/QRCoder) 1.7.0 - MIT License
+- [.NET 10](https://github.com/dotnet/runtime) - MIT License
+
 ## Contributing
 Issues and PRs are welcome! Please keep changes small, tested, and documented.
