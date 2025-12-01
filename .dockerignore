@@ -1,0 +1,59 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Build artifacts
+bin/
+obj/
+publish/
+*.exe
+*.dll
+*.pdb
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Test artifacts
+TestResults/
+coverage/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Sensitive data
+*.xls
+*.xlsx
+appsettings.Development.json
+appsettings.*.json
+!appsettings.json
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Docker
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+~$*
+*.tmp

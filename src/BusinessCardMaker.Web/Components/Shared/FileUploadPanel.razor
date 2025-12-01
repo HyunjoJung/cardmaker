@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Components.Forms
+
+<div class="text-center p-4">
+    <p class="text-muted mb-4">@Description</p>
+    @if (IsInteractive)
+    {
+        <label for="@InputId" class="visually-hidden">@Label</label>
+        <InputFile id="@InputId"
+                   OnChange="@OnFileSelected"
+                   accept="@Accept"
+                   class="form-control"
+                   style="max-width: 300px; margin: 0 auto;" />
+        <button class="btn @ButtonClass btn-lg mt-3" @onclick="OnSubmit" disabled="@IsSubmitDisabled">
+            @ButtonText
+        </button>
+        <p class="mt-2 small text-muted">@Hint</p>
+    }
+    else
+    {
+        <div class="placeholder-glow">
+            <div class="placeholder col-6" style="height: 38px;"></div>
+            <div class="placeholder btn btn-primary btn-lg mt-3 disabled"></div>
+            <div class="placeholder col-2 mt-2"></div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter] public string InputId { get; set; } = "fileInput";
+    [Parameter] public string Label { get; set; } = "Select file";
+    [Parameter] public string Description { get; set; } = "Upload your file";
+    [Parameter] public string ButtonText { get; set; } = "Submit";
+    [Parameter] public string ButtonClass { get; set; } = "btn-primary";
+    [Parameter] public string Accept { get; set; } = ".xlsx,.xls";
+    [Parameter] public string Hint { get; set; } = "Max 10MB";
+    [Parameter] public bool IsInteractive { get; set; }
+    [Parameter] public bool IsSubmitDisabled { get; set; }
+    [Parameter] public EventCallback<InputFileChangeEventArgs> OnFileSelected { get; set; }
+    [Parameter] public EventCallback OnSubmit { get; set; }
+}

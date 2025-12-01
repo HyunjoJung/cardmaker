@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/BusinessCardMaker.Core/BusinessCardMaker.Core.csproj" />
+  <Project Path="src/BusinessCardMaker.Web/BusinessCardMaker.Web.csproj" />
+  <Project Path="tests/BusinessCardMaker.Tests/BusinessCardMaker.Tests.csproj" />
+  <Project Path="tests/BusinessCardMaker.E2ETests/BusinessCardMaker.E2ETests.csproj" />
+</Solution>

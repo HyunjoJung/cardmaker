@@ -1,0 +1,96 @@
+# Claude Code specific files
+CLAUDE.md
+
+# Sensitive data files (employee information)
+*.xls
+*.xlsx
+!samples/*.xls
+!samples/*.xlsx
+
+# .NET Build artifacts
+bin/
+obj/
+publish/
+publish.zip
+*.exe
+!BusinessCardMaker_Setup*.exe
+
+# .NET User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio
+.vs/
+*.rsuser
+
+# ASP.NET Development settings
+appsettings.Development.json
+appsettings.*.json
+!appsettings.json
+!appsettings.sample.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+venv/
+env/
+.env
+wine-build-env/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Generated PowerPoint and PDF files
+*.pptx
+!templates/*.pptx
+!src/BusinessCardMaker.Web/wwwroot/templates/CardMaker_Template.pptx
+*.pdf
+
+# PyInstaller (legacy)
+build/
+dist/
+*.spec
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+~$*
+*.tmp
+
+# Logs
+logs/
+*.log
+
+# Test coverage
+coverage/
+TestResults/
+*.coveragexml
+
+# my note
+AGENTS.md
+plan.md
+
+# Development artifacts (not for open source)
+old/
+ppts/
+scripts/
