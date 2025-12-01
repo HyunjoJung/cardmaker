@@ -2,6 +2,7 @@
 @using BusinessCardMaker.Core.Models
 @using BusinessCardMaker.Core.Services.Import
 @using BusinessCardMaker.Core.Services.CardGenerator
+@using BusinessCardMaker.Web.Components.Shared
 @using Microsoft.AspNetCore.Components.Forms
 @using Microsoft.JSInterop
 @using Microsoft.AspNetCore.Hosting
@@ -111,6 +112,8 @@
                         <i class="bi bi-arrow-counterclockwise"></i> Start New
                     </button>
                 </div>
+
+                <SupportFooter />
             </div>
         </div>
     }
