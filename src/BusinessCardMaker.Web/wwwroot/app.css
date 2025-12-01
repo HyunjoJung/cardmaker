@@ -17,7 +17,7 @@
     /* Dark mode */
     --bg-color: #1a1a1a;
     --text-color: #e9ecef;
-    --text-muted: #adb5bd;
+    --text-muted: #ced4da;
     --card-bg: #2d2d2d;
     --border-color: #495057;
     --primary-color: #3d8bfd;
@@ -33,7 +33,7 @@
     :root:not([data-theme="light"]) {
         --bg-color: #1a1a1a;
         --text-color: #e9ecef;
-        --text-muted: #adb5bd;
+        --text-muted: #ced4da;
         --card-bg: #2d2d2d;
         --border-color: #495057;
         --primary-color: #3d8bfd;
@@ -218,6 +218,10 @@ h1:focus {
     color: var(--text-muted) !important;
 }
 
+[data-theme="dark"] .step-body .text-muted {
+    color: var(--text-muted) !important;
+}
+
 [data-theme="dark"] .border,
 [data-theme="dark"] .card,
 [data-theme="dark"] .list-group-item {
@@ -239,6 +243,12 @@ h1:focus {
 
 [data-theme="dark"] .bg-light {
     background-color: #2d2d2d !important;
+    color: var(--text-color) !important;
+}
+
+[data-theme="dark"] .card-header.bg-light {
+    background-color: #2d2d2d !important;
+    color: var(--text-color) !important;
 }
 
 [data-theme="dark"] .navbar-dark .navbar-nav .nav-link {
@@ -476,6 +486,27 @@ h1:focus {
 
 [data-theme="dark"] .floating-card {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* System dark mode preference */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .bg-light {
+        background-color: #2d2d2d !important;
+        color: #e9ecef !important;
+    }
+
+    :root:not([data-theme="light"]) .card-header.bg-light {
+        background-color: #2d2d2d !important;
+        color: #e9ecef !important;
+    }
+
+    :root:not([data-theme="light"]) .text-muted {
+        color: #ced4da !important;
+    }
+
+    :root:not([data-theme="light"]) .step-body .text-muted {
+        color: #ced4da !important;
+    }
 }
 
 /* Responsive padding adjustments */
