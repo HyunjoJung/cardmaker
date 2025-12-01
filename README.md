@@ -1,6 +1,6 @@
 # CardMaker
 
-Stateless, memory-only business card generator that ingests employee data from Excel, merges it into PowerPoint templates with OpenXML, and generates QR codes for vCards. Built with Blazor Server for a fast, secure, and easy-to-deploy solution.
+Stateless, database-free business card generator that ingests employee data from Excel, merges it into PowerPoint templates with OpenXML, and generates QR codes for vCards. Built with Blazor Server for a fast, secure, and easy-to-deploy solution.
 
 🌐 **Live Demo**: [cardmaker.hyunjo.uk](https://cardmaker.hyunjo.uk)
 
