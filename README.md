@@ -5,9 +5,9 @@ Stateless, database-free business card generator that ingests employee data from
 🌐 **Live Demo**: [cardmaker.hyunjo.uk](https://cardmaker.hyunjo.uk)
 
 ## Highlights
-- Excel import (xlsx) with header auto-detection and a downloadable template; no database writes.
-- PowerPoint card generation with formatting preservation via `DocumentFormat.OpenXml`; optional PDF conversion via LibreOffice.
-- QR code generation for business cards with customizable vCard data.
+- Excel import (xlsx) using the provided template headers (Name, Position, Email, etc.); no database writes.
+- PowerPoint card generation with formatting preservation via `DocumentFormat.OpenXml`.
+- QR code generation that embeds vCard data into the PPT template’s `{qrcode}` placeholder.
 - Security-first defaults in the web host (CSP, rate limiting, health checks).
 - Docker- and compose-ready; Apache 2.0 licensed.
 
@@ -32,8 +32,8 @@ Prereqs: .NET 10 SDK, Node not required, Docker optional.
 dotnet build BusinessCardMaker.slnx
 
 # Run the web app
-dotnet run --project src/BusinessCardMaker.Web
-# browse http://localhost:5255
+dotnet run --project src/BusinessCardMaker.Web --urls http://localhost:5049
+# browse http://localhost:5049
 
 # Tests (add tests under tests/BusinessCardMaker.Tests)
 dotnet test BusinessCardMaker.slnx
